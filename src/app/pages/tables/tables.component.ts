@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Assets } from 'src/app/services/asset/get_assets/assets.service';
 
 @Component({
   selector: 'app-tables',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablesComponent implements OnInit {
 
-  constructor() { }
+  tableData:any = [];
+  selectedAsset:any;
+
+  constructor(private overview: Assets,private SpinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.getTabelData();
   }
 
+  getTabelData() {
+    this.SpinnerService.show(); 
+    this.overview.getAssets().subscribe(data => {
+      this.tableData = data;
+      console.log(this.tableData);
+      this.SpinnerService.hide();
+    })    
+  };
+
+  onSelect(asset): void {
+    this.selectedAsset = asset;
+    console.log(this.selectedAsset);
+  }
 }

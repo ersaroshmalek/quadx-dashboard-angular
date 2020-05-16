@@ -12,6 +12,21 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ToggleButtonComponent } from './toggle_componenet';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+
+import { NgxSpinnerModule } from "ngx-spinner"; 
+import { OtableComponent } from 'src/app/pages/overview_table/otable/otable.component';
+
+
+
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -21,14 +36,26 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonToggleModule,
+    MatNativeDateModule,
+    NgxSpinnerModule,
+    MatSelectModule,
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
-    MapsComponent
+    MapsComponent,
+    ToggleButtonComponent,
+    OtableComponent,
   ]
 })
 
