@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -9,22 +9,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AssetService {
 
-  assetUrl = 'http://www.localhost:5000//api/v1/asset/data'
+  assetUrl = 'http://www.localhost:5000/api/v1/asset/data'
 
   constructor(private http: HttpClient) {}
 
-  getAssetById(assetId: string){
+  getAssetById(assetId){
+    let params = new HttpParams();
+    params = params.append('lte','1589114638') 
+    params = params.append('gte','0') 
     const url = `${this.assetUrl}/${assetId}`;
-    return this.http.get(url,{ 
-      params: {
-        lte: '0',
-        get: '0'
-      }
-    }).pipe(
-      tap(x=>console.log(x)
-      ),
-      catchError(this.handleError)
-    )
+    console.log(url);
+    
+    return this.http.get(url, {params: params}).pipe(
+      tap(data => console.log('Asset id fetched: ' + JSON.stringify(data))),
+      catchError(this.handleError))
   }
   private handleError(err: HttpErrorResponse) {
     let errMsg = '';
