@@ -13,13 +13,11 @@ export class AssetService {
 
   constructor(private http: HttpClient) {}
 
-  getAssetById(assetId){
+  getAssetById(assetId,startDate,endDate){
     let params = new HttpParams();
-    params = params.append('lte','1589114638') 
-    params = params.append('gte','0') 
+    params = params.append('lte',startDate) 
+    params = params.append('gte',endDate) 
     const url = `${this.assetUrl}/${assetId}`;
-    console.log(url);
-    
     return this.http.get(url, {params: params}).pipe(
       tap(data => console.log('Asset id fetched: ' + JSON.stringify(data))),
       catchError(this.handleError))
