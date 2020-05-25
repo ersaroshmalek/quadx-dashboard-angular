@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Add asset</h2>
+<mat-dialog-content class="mat-typography" style="height: 20vh; width: 50vw;">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <input type="text" matInput id="input-first-name" class="form-control form-control-alternative" placeholder="type the asset to be added..." matInput [(ngModel)]="data.assetNm" >
+          </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data.assetNm" [disabled]="!data.assetNm">Add</button>
+</mat-dialog-actions>
+

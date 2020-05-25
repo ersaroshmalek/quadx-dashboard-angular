@@ -22,6 +22,9 @@ export class MapsComponent implements AfterViewInit, OnInit {
   registerForm: FormGroup;
   submitted:false;
   moment = moment; 
+  layerGroup:any;
+  markerList:any=[]
+  
   
   constructor(
               private formBuilder: FormBuilder,
@@ -100,22 +103,41 @@ export class MapsComponent implements AfterViewInit, OnInit {
     )
   }
 
+// overview on the map
   assetMarker(map: L.map){
+    if(this.layerGroup != null){
+      map.removeLayer(this.layerGroup)
+    }
+    this.layerGroup = L.layerGroup().addTo(map);
+  
     this.tableArray.forEach(m => {
       const lat = m.payload.d.lat;
       const lon = m.payload.d.lon;
       const message = this.moment.unix(m.added_on).format('Do MMMM YYYY, dddd h:mm:ss a')
-      console.log(lat, lon);
-      const marker = L.marker([lon, lat]).addTo(map);
-      marker.bindPopup(`<b>${m.asset_name}</b><br>${message}`).openPopup();
+      const marker = L.marker([lat, lon]).bindPopup(`<b>${m.asset_name}</b><br>${message}`).openPopup()
+      
+      //this.layerGroup.addLayer(marker);
+      //marker.bindPopup(`<b>${m.asset_name}</b><br>${message}`).openPopup();
     })
+    //var overlay = {'markers': this.layerGroup};
+    //L.control.layers(null, overlay).addTo(map);
+    map.eachLayer(function(layer){
+      console.log(layer);
+  });
   }
 
+
+  // get time data
   getAssetIdMarker(id,startDate,endDate){
     this.assetId.getAssetById(id,startDate,endDate).subscribe(
       data => {
+        this.markerList.map(markerLayer => {
+          this.map.removeLayer(markerLayer);
+        })
+        this.markerList = []
         this.payload = []
         this.payload.push(data)
+        var layerGroup = L.layerGroup().addTo(this.map);
         this.payload[0].data.payload.forEach(arr => {
           console.log("Iteration....",arr)
 
@@ -123,9 +145,17 @@ export class MapsComponent implements AfterViewInit, OnInit {
           const lon = arr.payload.lon;
           const message = this.moment.unix(arr.added_on).format('Do MMMM YYYY, dddd h:mm:ss a')
           console.log(lat, lon);
-          const marker = L.marker([lon, lat]).addTo(this.map);
+          
+          const marker = L.marker([lat, lon]);
+          
+          this.markerList.push(marker) //add marker layer to the list
+          //layerGroup.addLayer(this.markerList);
           marker.bindPopup(`<b>${arr.asset_name}</b><br>${message}`).openPopup();
+          marker.addTo(this.map)
         })
+        //var overlay = {'markers1': layerGroup};
+        //L.control.layers(null, overlay).addTo(this.map);
+        
         this.SpinnerService.hide()},
       err => this.errorMessage = <any>err)
   }
@@ -133,10 +163,22 @@ export class MapsComponent implements AfterViewInit, OnInit {
   onSubmit(){
     if(!this.registerForm.invalid){
       const device = this.registerForm.value.asset
+
+      // const start = this.registerForm.value.startDate
+      // const end = this.registerForm.value.endDate
+
       const start = formatDate(this.registerForm.value.startDate,'shortDate','en-US');
       const end = formatDate(this.registerForm.value.endDate,'shortDate','en-US'); 
       var assetId = ''
+      
+      const epochStart =  Math.floor( (new Date(start).getTime() ) / 1000 );
+      const epochEnd =  Math.floor( (new Date(end).getTime() ) / 1000 );
 
+      console.log("start epoch..",epochStart);
+      console.log("end epoch..",epochEnd);
+
+      // console.log("printing epochs..",epochStart,epochEnd);
+      
       this.SpinnerService.show();
       this.tableArray.forEach(i => {
         if(device == i.asset_name) {
@@ -144,7 +186,7 @@ export class MapsComponent implements AfterViewInit, OnInit {
         }
       })
       console.log(assetId);
-      this.getAssetIdMarker(assetId,start,end)
+      this.getAssetIdMarker(assetId,epochStart,epochEnd)
     } 
   }
 

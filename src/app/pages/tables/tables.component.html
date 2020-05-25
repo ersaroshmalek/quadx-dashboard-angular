@@ -4,6 +4,7 @@
   <!-- Table -->
   <div class="row">
     <div class="col">
+      <button mat-raised-button (click)="openDialog()" style="margin-bottom:10px;">Add asset</button>
       <div class="card shadow">
         <div class="card-header border-0">
           <h3 class="mb-0">Asset overview</h3>
@@ -13,7 +14,7 @@
             <thead class="thead-light">
               <tr>
                 <th scope="col">Owner name</th>
-                <th scope="col">email</th>
+                <th scope="col">Asset Username</th>
                 <th scope="col">Asset name</th>
                 <th scope="col">Asset type</th>
                 <th scope="col">added on</th>
@@ -25,7 +26,7 @@
                 {{table.owner_name}}
               </td>
               <td>
-                {{table.email}}
+                {{table.asset_username}}
               </td>
               <td>
                 {{table.asset_name}}
@@ -41,7 +42,7 @@
               </td>
           </table>
         </div>
-        <div class="card-footer py-4">
+        <!-- <div class="card-footer py-4">
           <nav aria-label="...">
             <ul class="pagination justify-content-end mb-0">
               <li class="page-item disabled">
@@ -65,7 +66,7 @@
               </li>
             </ul>
           </nav>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

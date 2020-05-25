@@ -3,6 +3,7 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/auth/login.service';
+import { DetailsService } from 'src/app/services/owner/details.service';
 
 
 @Component({
@@ -14,14 +15,19 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
+  errorMessage: string;
+  ownerName: any;
+  ownerAvtar: any;
 
   constructor(location: Location,  private element: ElementRef, private router: Router,
-                        private logout: LoginService) {
+                        private logout: LoginService,
+                        private owner: DetailsService) {
     this.location = location;
   }
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.getAvtar();
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -41,5 +47,17 @@ export class NavbarComponent implements OnInit {
     this.logout.logout().subscribe(data => {
         console.log("Successfully logout",data);
       });
+    }
+
+    getAvtar(): void {
+      this.owner.getOwnerDetail().subscribe(
+        owner => {
+          this.ownerName = owner.owner_name; 
+          this.ownerAvtar = owner.avatar;
+          console.log(this.ownerAvtar);
+          
+        },
+        err => this.errorMessage = <any>err
+      )
     }
   }

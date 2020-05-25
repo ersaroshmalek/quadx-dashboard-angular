@@ -1,6 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginService } from 'src/app/auth/login.service';
 import { Router } from '@angular/router';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +14,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+
   errorMessage:string;
+  loginMessage: "Logged in success fully"
   
   constructor(
     private log: LoginService,
     private router: Router,
+    private _snackBar: MatSnackBar,
     ) {}
 
   ngOnInit() {
@@ -30,14 +40,25 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.log.getUserDetails(username, password).subscribe(
       res => {
         if(res.token.access_token != null) {
-          console.log(res.token.access_token);
+          this.openSnackBar("Logged in successfully!")
           localStorage.setItem('JWT_TOKEN',res.token.access_token)
           this.router.navigate(['maps'])
-          console.log(this.log.isLoggedIn())
         } else {
           console.log("Bad credential")
+          this.openSnackBar("Wronge Credentials!")
         }
       },
-      error => this.errorMessage = <any>error)
+      error => {
+        this.errorMessage = <any>error
+        this.openSnackBar("Bad Credentials!")
+      })
   }
+
+  openSnackBar(message:string) {
+    this._snackBar.open(message, 'End now', {
+      duration: 2000,
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }  
 }

@@ -1,31 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import * as moment from 'moment';
-import { formatDate } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AssetService {
+export class AddAssetService {
 
-  assetUrl = 'http://www.localhost:5000/api/v1/asset/data'
-  moment = moment;
+  loginUrl = 'http://localhost:5000/api/v1/asset/add';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getAssetById(assetId,startDate,endDate){
-    let params = new HttpParams();
-    params = params.append('lte',endDate) 
-    params = params.append('gte',startDate) 
-
-    const url = `${this.assetUrl}/${assetId}`;
-    return this.http.get(url, {params: params}).pipe(
-      tap(data => console.log('Asset id fetched: ' + JSON.stringify(data))),
-      catchError(this.handleError))
+  addAsset(asset_username:string): Observable<any>{
+    const options = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(this.loginUrl, {asset_username}, { headers: options }).pipe(
+      catchError(this.handleError));
   }
+
   private handleError(err: HttpErrorResponse) {
     let errMsg = '';
     if (err.error instanceof Error) {
@@ -40,5 +33,4 @@ export class AssetService {
     }
     return throwError(errMsg);
   }
-
 }

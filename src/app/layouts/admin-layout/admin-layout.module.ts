@@ -21,9 +21,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ToggleButtonComponent } from './toggle_componenet';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { NgxSpinnerModule } from "ngx-spinner"; 
 import { OtableComponent } from 'src/app/pages/overview_table/otable/otable.component';
+import { AssetAddComponent } from 'src/app/components/asset/asset-add/asset-add.component';
+
 
 
 
@@ -46,6 +51,9 @@ import { OtableComponent } from 'src/app/pages/overview_table/otable/otable.comp
     NgxSpinnerModule,
     MatSelectModule,
     MatButtonModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
     ReactiveFormsModule
   ],
   declarations: [
@@ -56,6 +64,7 @@ import { OtableComponent } from 'src/app/pages/overview_table/otable/otable.comp
     MapsComponent,
     ToggleButtonComponent,
     OtableComponent,
+    AssetAddComponent
   ]
 })
 
