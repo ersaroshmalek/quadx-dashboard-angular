@@ -2,12 +2,12 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="col-xl-3 col-lg-3" style="display: flex;">
         <mat-form-field style="margin-right: 10px;">
-          <input matInput formControlName="startDate" [matDatepicker]="picker1" placeholder="mm/dd/yyyy" [ngClass]="{ 'is-invalid': submitted}">
+          <input matInput formControlName="startDate" [matDatepicker]="picker1" placeholder="mm/dd/yyyy" [ngModel]="dateS" [ngClass]="{ 'is-invalid': submitted}">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1 ngDefaultControl></mat-datepicker>
         </mat-form-field>
         <mat-form-field style="margin-right: 10px;">
-          <input matInput formControlName="endDate"[matDatepicker]="picker2" placeholder="mm/dd/yyyy" [ngClass]="{ 'is-invalid': submitted}">
+          <input matInput formControlName="endDate"[matDatepicker]="picker2" placeholder="mm/dd/yyyy" [ngModel]="dateE" [ngClass]="{ 'is-invalid': submitted}">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2 ngDefaultControl></mat-datepicker>
         </mat-form-field>
