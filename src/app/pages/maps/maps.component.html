@@ -1,44 +1,65 @@
 <div class="container-fluid mt--7">
+  <div class="row">
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div class="col-xl-3 col-lg-3" style="display: flex;">
-        <mat-form-field style="margin-right: 10px;">
-          <input matInput formControlName="startDate" [matDatepicker]="picker1" placeholder="mm/dd/yyyy" [ngClass]="{ 'is-invalid': submitted}">
-          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-          <mat-datepicker #picker1 ngDefaultControl></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field style="margin-right: 10px;">
-          <input matInput formControlName="endDate"[matDatepicker]="picker2" placeholder="mm/dd/yyyy" [ngClass]="{ 'is-invalid': submitted}">
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2 ngDefaultControl></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field style="margin-right: 10px;">
-          <mat-label>Select Asset</mat-label>
-          <mat-select formControlName="asset" name="Asset" [ngClass]="{ 'is-invalid': submitted}">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let asset of tableArray" [value]="asset.asset_name">
-              {{asset.asset_name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <span >
-          <button mat-raised-button>Show data</button>
-        </span>
-    </div>
-  </form>
+    <div class="container-fluid">
     <div class="row">
-      <div class="col">
-        <div class="card shadow border-0">
-          <div id="map" #map style="height: 600px;"></div>
+      <div class="col-lg-3 col-sm-6">
+        <div class="form-group">
+          <mat-form-field style="margin-right: 5px;" >
+            <input matInput formControlName="startDate" [matDatepicker]="picker1" placeholder="mm/dd/yyyy"
+               [ngClass]="{ 'is-invalid': submitted}">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1 ngDefaultControl></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6">
+        <div class="form-group">
+          <mat-form-field style="margin-right: 5px;">
+            <input matInput formControlName="endDate" [matDatepicker]="picker2" placeholder="mm/dd/yyyy"
+               [ngClass]="{ 'is-invalid': submitted}">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2 ngDefaultControl></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="col-lg-3 col-sm-6">
+        <div class="form-group">
+          <mat-form-field style="margin-right: 10px;">
+            <mat-label>Select Asset</mat-label>
+            <mat-select formControlName="asset" name="Asset" [ngClass]="{ 'is-invalid': submitted}">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let asset of tableArray" [value]="asset.asset_name">
+                {{asset.asset_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6">
+        <div class="form-group">
+          <span>
+            <button mat-raised-button>Show data</button>
+          </span>
         </div>
       </div>
     </div>
+  </div>
+  </form>
+</div>
+  <div class="row">
+    <div class="col">
+      <div class="card shadow border-0">
+        <div id="map" leaflet (leafletMapReady)="onMapReady" style="height: 600px;"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
-  <p style="color: white">Please Wait. </p>  
-  </ngx-spinner> 
-
-
-
-
-
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
+  <p style="color: white">Please Wait. </p>
+</ngx-spinner>
