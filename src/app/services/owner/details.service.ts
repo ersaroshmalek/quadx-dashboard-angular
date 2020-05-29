@@ -37,7 +37,7 @@ export class DetailsService {
 
   getOwnerDetail(): Observable<owner> {
     return this.http.get<owner>(this.ownerUrl).pipe(
-      tap(data => console.log('Owner details fetched: ' + JSON.stringify(data))),
+      tap(),
       catchError(this.handleError))
     }
 

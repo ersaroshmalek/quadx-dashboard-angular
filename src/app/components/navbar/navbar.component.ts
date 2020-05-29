@@ -54,8 +54,6 @@ export class NavbarComponent implements OnInit {
         owner => {
           this.ownerName = owner.owner_name; 
           this.ownerAvtar = owner.avatar;
-          console.log(this.ownerAvtar);
-          
         },
         err => this.errorMessage = <any>err
       )

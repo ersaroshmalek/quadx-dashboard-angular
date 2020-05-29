@@ -16,7 +16,7 @@ export class AssetOverviewService {
 
   getAsset(): Observable<any[]> {
     return this.http.get<any[]>(this.assetUrl).pipe(
-      tap(data => console.log('Asset data fetched: ' + JSON.stringify(data))),
+      tap(),
       catchError(this.handleError))
   }
 

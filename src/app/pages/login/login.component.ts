@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
-
+  inputType: string = "password";
   errorMessage:string;
   loginMessage: "Logged in success fully"
   
@@ -60,5 +60,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
-  }  
+  }
+
+  onShowPassword(event) {
+    if(event.target.checked){
+      this.inputType = "text"
+    }
+    else {
+      this.inputType = "password"
+    }
+  }
 }

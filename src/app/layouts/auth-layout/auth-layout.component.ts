@@ -17,7 +17,7 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
     html.classList.add("auth-layout");
     var body = document.getElementsByTagName("body")[0];
     console.log("body","body");
-    body.classList.add("bg-default");
+    body.classList.add("bg-danger");
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
    });
@@ -27,6 +27,6 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
     var html = document.getElementsByTagName("html")[0];
     html.classList.remove("auth-layout");
     var body = document.getElementsByTagName("body")[0];
-    body.classList.remove("bg-default");
+    body.classList.remove("bg-danger");
   }
 }
