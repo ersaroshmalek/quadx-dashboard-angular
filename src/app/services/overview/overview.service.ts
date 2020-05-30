@@ -19,12 +19,13 @@ export class OverviewService {
 
   getAssetById(): Observable<any[]> {
     return this.http.get<any[]>(this.assetUrl).pipe(
-      tap(data => console.log('Asset id fetched: ' + JSON.stringify(data))),
+      tap(),
       catchError(this.handleError))
     }
 
   private handleError(err: HttpErrorResponse) {
     let errMsg = '';
+    
     if (err.error instanceof Error) {
       // A client-side or network error occurred. Handle it accordingly.
       console.log('An error occurred:', err.error.message);

@@ -65,7 +65,7 @@ export class TablesComponent implements OnInit {
   }
 
   openSnackBar(message:string) {
-    this._snackBar.open(message, 'End now', {
+    this._snackBar.open(message, 'DONE', {
       duration: 2000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,

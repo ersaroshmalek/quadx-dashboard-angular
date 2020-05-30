@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   openSnackBar(message:string) {
-    this._snackBar.open(message, 'End now', {
+    this._snackBar.open(message, '', {
       duration: 2000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,

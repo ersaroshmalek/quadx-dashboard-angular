@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OverviewService } from 'src/app/services/overview/overview.service';
 import { AssetOverviewService } from 'src/app/services/asset/get_data_by_date/asset-overview.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-overview-c',
@@ -13,7 +14,7 @@ export class OverviewCComponent implements OnInit {
   totalAsset: number;
   errorMessage: string;
 
-  constructor(private assetOverview: AssetOverviewService) { }
+  constructor(private assetOverview: AssetOverviewService, private router: Router) { }
 
   ngOnInit(): void {
     this.getData();
@@ -24,7 +25,11 @@ export class OverviewCComponent implements OnInit {
       assets => {
         this.assetData = assets
         this.totalAsset = this.assetData.length},
-      error => this.errorMessage = <any>error
+      error => {
+        localStorage.clear()
+        this.router.navigate(['login'])
+        this.errorMessage = <any>error
+      }
     )
   }
 }

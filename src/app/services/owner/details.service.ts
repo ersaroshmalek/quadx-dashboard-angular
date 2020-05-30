@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 interface owner {
   user_name:string;
@@ -50,8 +51,8 @@ export class DetailsService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
-      console.log(`Backend returned code ${err.status}`);
-      errMsg = err.error.status;
+      console.log(`Backend returned code`,err);
+      errMsg = err.error.message;
     }
     return throwError(errMsg);
   }
