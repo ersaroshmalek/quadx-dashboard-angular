@@ -13,19 +13,15 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Owner name</th>
-                <th scope="col">Asset Username</th>
-                <th scope="col">Asset name</th>
-                <th scope="col">Asset type</th>
-                <th scope="col">added on</th>
-                <th scope="col">Action</th>
+                <th scope="col" class="colum-sticky left-top">Asset Username</th>
+                <th scope="col" class="colum-sticky top">Asset name</th>
+                <th scope="col" class="colum-sticky top">Asset type</th>
+                <th scope="col" class="colum-sticky top">added on</th>
+                <th scope="col" class="colum-sticky top">Action</th>
               </tr>
             </thead>
             <tbody *ngFor="let table of tableData" (click)="onSelect(table)">
-              <td>
-                {{table.owner_name}}
-              </td>
-              <td>
+              <td class="colum-sticky left">
                 {{table.asset_username}}
               </td>
               <td>
