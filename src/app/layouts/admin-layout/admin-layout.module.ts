@@ -25,9 +25,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
-import { NgxSpinnerModule } from "ngx-spinner"; 
-import { OtableComponent } from 'src/app/pages/overview_table/otable/otable.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 import { AssetAddComponent } from 'src/app/components/asset/asset-add/asset-add.component';
+import { OveriviewMapComponent } from 'src/app/pages/overview_map/overiview-map/overiview-map.component';
 
 
 
@@ -63,8 +63,8 @@ import { AssetAddComponent } from 'src/app/components/asset/asset-add/asset-add.
     IconsComponent,
     MapsComponent,
     ToggleButtonComponent,
-    OtableComponent,
-    AssetAddComponent
+    AssetAddComponent,
+    OveriviewMapComponent
   ]
 })
 

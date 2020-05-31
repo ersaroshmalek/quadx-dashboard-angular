@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OtableComponent } from './otable.component';
+import { OveriviewMapComponent } from './overiview-map.component';
 
-describe('OtableComponent', () => {
-  let component: OtableComponent;
-  let fixture: ComponentFixture<OtableComponent>;
+describe('OveriviewMapComponent', () => {
+  let component: OveriviewMapComponent;
+  let fixture: ComponentFixture<OveriviewMapComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OtableComponent ]
+      declarations: [ OveriviewMapComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OtableComponent);
+    fixture = TestBed.createComponent(OveriviewMapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

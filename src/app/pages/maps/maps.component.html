@@ -1,64 +1,68 @@
 <div class="container-fluid mt--7">
   <div class="row">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-3 col-sm-6">
-        <div class="form-group">
-          <mat-form-field style="margin-right: 20px;" >
-            <input matInput formControlName="startDate" [matDatepicker]="picker1" placeholder="mm/dd/yyyy"
-               [ngClass]="{ 'is-invalid': submitted}">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1 ngDefaultControl></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-sm-6">
-        <div class="form-group">
-          <mat-form-field style="margin-right: 20px;">
-            <input matInput formControlName="endDate" [matDatepicker]="picker2" placeholder="mm/dd/yyyy"
-               [ngClass]="{ 'is-invalid': submitted}">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2 ngDefaultControl></mat-datepicker>
-          </mat-form-field>
-        </div>
-      </div>
-
-
-      <div class="col-lg-3 col-sm-6">
-        <div class="form-group">
-          <mat-form-field style="margin-right: 10px;">
-            <mat-label>Select Asset</mat-label>
-            <mat-select formControlName="asset" name="Asset" [ngClass]="{ 'is-invalid': submitted}">
-              <mat-option>None</mat-option>
-              <mat-option *ngFor="let asset of tableArray" [value]="asset.asset_name">
-                {{asset.asset_name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-sm-6">
-        <div class="form-group">
-          <span>
-            <button mat-raised-button>Show data</button>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-  </form>
-</div>
-  <div class="row">
     <div class="col">
-      <div class="card shadow border-0">
-        <div id="map" leaflet (leafletMapReady)="onMapReady" style="height: 600px;"></div>
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model" style="margin-bottom:10px;">
+        <label ngbButtonLabel class="btn-secondary">
+          <input ngbButton type="radio" value="map"> Map 
+        </label>
+        <label ngbButtonLabel class="btn-secondary">
+          <input ngbButton type="radio" value="table"> Data List
+        </label>
       </div>
-    </div>
-  </div>
+      
+    
+             <div class="card shadow border-0">
+        <div id="mapOverview" style="height: 600px;"></div>
+      </div>
+  
+    <div *ngIf="model == 'table'" style="margin-top: -600px; z-index: 999999;  position: absolute"  >
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h3 class="mb-0">Asset overview</h3>
+        
+          <div class="table-responsive" style="height: 530px;overflow-x: scroll;">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col" style="position: absolute;">Asset Name</th>
+                  <th scope="col">Asset type</th>
+                  <th scope="col">Temperature</th>
+                  <th scope="col">Humidity</th>
+                  <th scope="col">Lat</th>
+                  <th scope="col">Lon</th>
+                  <th scope="col">Added_on</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let asset of tableArray" (click)="onSelect(asset)">
+                <td style="position: absolute;">
+                  {{asset.asset_name}}
+                </td>
+                <td>
+                  {{asset.type}}
+                </td>
+                <td>
+                  {{asset.payload.d.temp}}
+                </td>
+                <td>
+                  {{asset.payload.d.hum}}
+                </td>
+                <td>
+                  {{asset.payload.d.lat}}
+                </td>
+                <td>
+                  {{asset.payload.d.lon}}
+                </td>
+                <td>
+                  {{asset.added_on}}
+                </td>
+            </table>
+          </div>
+      </div>
+      </div>
+   
 </div>
+  </div>
+    <!-- Table -->
 
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
   <p style="color: white">Please Wait. </p>
