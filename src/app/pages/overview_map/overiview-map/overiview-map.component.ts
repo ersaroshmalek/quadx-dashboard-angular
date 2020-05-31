@@ -52,6 +52,8 @@ export class OveriviewMapComponent implements OnInit {
   markerList: any = []
   dateS: Date = new Date(139063374)
   dateE: Date = new Date();
+  startDate: any ;
+  endDate: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,9 +64,9 @@ export class OveriviewMapComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required],
       asset: ['', Validators.required],
+      sDate: ['', Validators.required],
+      eDate: ['', Validators.required],
     })
     // this.initMap();
     this.getAssets();
@@ -218,10 +220,18 @@ export class OveriviewMapComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.registerForm.invalid) {
+    console.log(this.startDate);
+    console.log(this.endDate);
+
+    
+    if (!this.registerForm.invalid && this.startDate && this.endDate) {
+      const start = Math.floor( new Date(this.startDate.year, this.startDate.month, this.startDate.day).getTime() );
+      const end = Math.floor( new Date(this.endDate.year, this.startDate.month, this.startDate.day ).getTime()  );
+      console.log("start",start);
+      console.log("end",end);
       const device = this.registerForm.value.asset
-      const start = formatDate(this.registerForm.value.startDate, 'shortDate', 'en-US');
-      const end = formatDate(this.registerForm.value.endDate, 'shortDate', 'en-US');
+      // const start = formatDate(this.startDate, 'shortDate', 'en-US');
+      // const end = formatDate(this.endDate, 'shortDate', 'en-US');
       var assetId = ''
 
       const epochStart = Math.floor((new Date(start).getTime()) / 1000);
@@ -244,4 +254,9 @@ export class OveriviewMapComponent implements OnInit {
     });
   }
 
+
+  onDateChange(event){
+    console.log(event);
+    
+  }
 }

@@ -5,34 +5,34 @@
       <div class="row">
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <mat-form-field style="margin-right: 20px;" >
-              <input matInput formControlName="startDate" [matDatepicker]="picker1" placeholder="mm/dd/yyyy"
-                 [ngClass]="{ 'is-invalid': submitted}">
-              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-              <mat-datepicker #picker1 ngDefaultControl></mat-datepicker>
-            </mat-form-field>
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+              </div>
+              <input formControlName="sDate"  class="form-control datepicker" [ngModelOptions]="{standalone: true}"   placeholder="Select date" name="startDate" [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text"/>
+            </div>
           </div>
         </div>
   
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <mat-form-field style="margin-right: 20px;">
-              <input matInput formControlName="endDate" [matDatepicker]="picker2" placeholder="mm/dd/yyyy"
-                 [ngClass]="{ 'is-invalid': submitted}">
-              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-              <mat-datepicker #picker2 ngDefaultControl></mat-datepicker>
-            </mat-form-field>
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+              </div>
+              <input formControlName="eDate" class="form-control datepicker" [ngModelOptions]="{standalone: true}"  placeholder="End date" name="endDate"  [(ngModel)]="endDate"  ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
+            </div>
           </div>
         </div>
   
   
         <div class="col-lg-3 col-sm-6">
-          <div class="form-group">
-            <mat-form-field style="margin-right: 10px;">
-              <mat-label>Select Asset</mat-label>
-              <mat-select formControlName="asset" name="Asset" [ngClass]="{ 'is-invalid': submitted}">
+          <div class="form-group"  >
+            <mat-form-field >
+              <mat-label >Select Asset</mat-label>
+              <mat-select formControlName="asset" name="Asset" >
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let asset of tableArray" [value]="asset.asset_name">
+                <mat-option  *ngFor="let asset of tableArray" [value]="asset.asset_name">
                   {{asset.asset_name}}
                 </mat-option>
               </mat-select>

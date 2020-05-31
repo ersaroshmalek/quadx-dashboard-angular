@@ -42,10 +42,11 @@ ngb-datepicker {
     outline: none !important;
   }
   .ngb-dp-header {
+    background: 0 0!important;
     border-bottom: none !important;
 
     ngb-datepicker-navigation {
-      color: $primary;
+      color: $default;
 
       .ngb-dp-arrow{
         justify-content: center !important;
@@ -61,7 +62,7 @@ ngb-datepicker {
         top: -3px;
 
         .ngb-dp-navigation-chevron {
-          color: $primary;
+          color: $default;
           width: 6px;
           height: 6px;
         }
@@ -69,7 +70,7 @@ ngb-datepicker {
       ngb-datepicker-navigation-select {
         .custom-select {
           font-weight: 300;
-          color: $primary;
+          color: $default;
           border: none !important;
           background: transparent !important;
           -webkit-appearance: menulist !important;
@@ -84,11 +85,12 @@ ngb-datepicker {
     }
   }
   .ngb-dp-months {
-    ngb-datepicker-month-view {
+    ngb-datepicker-month {
       .ngb-dp-week {
+        background: 0 0!important;
         border: none;
         .ngb-dp-weekday {
-          color: $primary;
+          color: $default;
           padding-top: 10px;
           opacity: 0.8;
           font-style: normal !important;
