@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OverviewService } from 'src/app/services/overview/overview.service';
-import { AssetOverviewService } from 'src/app/services/asset/get_data_by_date/asset-overview.service';
 import { Router } from '@angular/router';
+import { AListService } from 'src/app/services/asset/asset_list/a-list.service';
 
 @Component({
   selector: 'app-overview-c',
@@ -14,14 +13,14 @@ export class OverviewCComponent implements OnInit {
   totalAsset: number;
   errorMessage: string;
 
-  constructor(private assetOverview: AssetOverviewService, private router: Router) { }
+  constructor(private list: AListService, private router: Router) { }
 
   ngOnInit(): void {
     this.getData();
   }
   
   private getData() {
-    this.assetOverview.getAsset().subscribe(
+    this.list.getAssetList().subscribe(
       assets => {
         this.assetData = assets
         this.totalAsset = this.assetData.length},

@@ -37,3 +37,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .mat-select-arrow{
       color: white !important;
   }
+.colum-sticky {
+    background: white;
+    position: sticky;
+    &.top {
+      top: 0;
+      z-index: 1;
+    }
+    &.left {
+      left: 0;
+      z-index: 1;
+    }
+    &.left-top {
+      left: 0;
+      top: 0;
+      z-index: 2;
+    }
+    &.right {
+      right: 0;
+    }
+    &.bottom {
+      bottom: 0;
+    }
+}

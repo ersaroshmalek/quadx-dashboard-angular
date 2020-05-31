@@ -1,7 +1,7 @@
 <div class="container-fluid mt--7">
   <div class="row">
     <div class="col">
-          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model" style="margin-bottom:10px;">
+      <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model" style="margin-bottom:10px;">
         <label ngbButtonLabel class="btn-secondary">
           <input ngbButton type="radio" value="map"> Map 
         </label>
@@ -9,61 +9,62 @@
           <input ngbButton type="radio" value="table"> Data List
         </label>
       </div>
-      
-    
-             <div class="card shadow border-0">
-        <div id="mapOverview" style="height: 600px;"></div>
+      <div class="card shadow border-0">
+      <div id="mapOverview" style="height: 600px;"></div>
       </div>
-  
-    <div *ngIf="model == 'table'" style="margin-top: -600px; z-index: 999999;  position: absolute"  >
-      <div class="card shadow">
+      <div class="card shadow border-0" *ngIf="model == 'table'" style="margin-top: -600px; z-index: 999999;">
+      <!-- <div class="card-header border-0"> -->
         <div class="card-header border-0">
-          <h3 class="mb-0">Asset overview</h3>
-        
-          <div class="table-responsive" style="height: 530px;overflow-x: scroll;">
-            <table class="table align-items-center table-flush">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col" style="position: absolute;">Asset Name</th>
-                  <th scope="col">Asset type</th>
-                  <th scope="col">Temperature</th>
-                  <th scope="col">Humidity</th>
-                  <th scope="col">Lat</th>
-                  <th scope="col">Lon</th>
-                  <th scope="col">Added_on</th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let asset of tableArray" (click)="onSelect(asset)">
-                <td style="position: absolute;">
-                  {{asset.asset_name}}
-                </td>
-                <td>
-                  {{asset.type}}
-                </td>
-                <td>
-                  {{asset.payload.d.temp}}
-                </td>
-                <td>
-                  {{asset.payload.d.hum}}
-                </td>
-                <td>
-                  {{asset.payload.d.lat}}
-                </td>
-                <td>
-                  {{asset.payload.d.lon}}
-                </td>
-                <td>
-                  {{asset.added_on}}
-                </td>
-            </table>
-          </div>
+          <h3 class="mb-0">Asset List</h3>
+        </div>
+        <div class="table-responsive" style="height: 530px;overflow-x: scroll;">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="colum-sticky left-top">Asset Name</th>
+                <th scope="col" class="colum-sticky top">Asset type</th>
+                <th scope="col" class="colum-sticky top">Temperature</th>
+                <th scope="col" class="colum-sticky top">Humidity</th>
+                <th scope="col" class="colum-sticky top">Lat</th>
+                <th scope="col" class="colum-sticky top">Lon</th>
+                <th scope="col" class="colum-sticky top">Added_on</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let asset of tableArray" (click)="onSelect(asset)">
+              <td class="colum-sticky left">
+                {{asset.asset_name}}
+              </td>
+              <td>
+                {{asset.asset_type}}
+              </td>
+              <td>
+                {{asset.payload.d.temp}}
+              </td>
+              <td>
+                {{asset.payload.d.hum}}
+              </td>
+              <td>
+                {{asset.payload.d.lat}}
+              </td>
+              <td>
+                {{asset.payload.d.lon}}
+              </td>
+              <td>
+                {{asset.added_on}}
+              </td>
+          </table>
+        </div>
+      <!-- </div> -->
       </div>
-      </div>
-   
-</div>
+    </div>
   </div>
+</div>
+
     <!-- Table -->
 
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
   <p style="color: white">Please Wait. </p>
 </ngx-spinner>
+
+
+
