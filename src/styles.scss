@@ -3,3 +3,37 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';  
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-focused .mat-form-field-label {
+    color: white !important;
+} 
+
+.mat-form-field-underline {
+    background-color: white !important;
+  } 
+  
+  .mat-form-field-ripple {
+    background-color: white !important;;
+  } 
+
+  .mat-form-field-label-wrapper{
+      color: white !important;
+  }
+
+  .mat-label{
+      color: white;
+  }
+  
+  .mat-select-value{
+      color: white !important;
+  }
+  .mat-select{
+      color: white !important;
+  }
+  .mat-select-placeholder {
+      color: white !important;
+  }
+
+  .mat-select-arrow{
+      color: white !important;
+  }
