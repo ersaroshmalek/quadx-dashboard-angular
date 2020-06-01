@@ -1,5 +1,5 @@
 <div class="container-fluid mt--7">
-    <div class="row">
+  <div class="row">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="container-fluid">
       <div class="row">
@@ -9,7 +9,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
               </div>
-              <input formControlName="sDate"  class="form-control datepicker" [ngModelOptions]="{standalone: true}"   placeholder="Select date" name="startDate" [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text"/>
+              <input formControlName="sDate"  class="form-control datepicker"    placeholder="Select date" name="startDate" [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text"/>
             </div>
           </div>
         </div>
@@ -20,7 +20,7 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
               </div>
-              <input formControlName="eDate" class="form-control datepicker" [ngModelOptions]="{standalone: true}"  placeholder="End date" name="endDate"  [(ngModel)]="endDate"  ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
+              <input formControlName="eDate" class="form-control datepicker"   placeholder="End date" name="endDate"  [(ngModel)]="endDate"  ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
             </div>
           </div>
         </div>
@@ -50,7 +50,20 @@
       </div>
     </div>
     </form>
+
+    <div class="row">
+      <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model"s>
+        <label ngbButtonLabel class="btn-secondary">
+          <input ngbButton type="radio" value="map"> Map 
+        </label>
+        <label ngbButtonLabel class="btn-secondary">
+          <input ngbButton type="radio" value="table"> Data List
+        </label>
+      </div>
+    </div>
+
   </div>
+    
     <div class="row">
       <div class="col">
         <div class="card shadow border-0">
@@ -58,6 +71,50 @@
         </div>
       </div>
     </div>
+    <div class="card shadow border-0" *ngIf="model == 'table'" style="margin-top: -600px; z-index: 999999;">
+      <!-- <div class="card-header border-0"> -->
+        <div class="card-header border-0">
+          <h3 class="mb-0">Asset List</h3>
+        </div>
+        <div class="table-responsive" style="height: 530px;overflow-x: scroll;">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col" class="colum-sticky left-top">Asset Name</th>
+                <th scope="col" class="colum-sticky top">Asset type</th>
+                <th scope="col" class="colum-sticky top">Temperature</th>
+                <th scope="col" class="colum-sticky top">Humidity</th>
+                <th scope="col" class="colum-sticky top">Lat</th>
+                <th scope="col" class="colum-sticky top">Lon</th>
+                <th scope="col" class="colum-sticky top">Added_on</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let asset of tableArray">
+              <td class="colum-sticky left">
+                {{asset.asset_name}}
+              </td>
+              <td>
+                {{asset.asset_type}}
+              </td>
+              <td>
+                {{asset.payload.d.temp}}
+              </td>
+              <td>
+                {{asset.payload.d.hum}}
+              </td>
+              <td>
+                {{asset.payload.d.lat}}
+              </td>
+              <td>
+                {{asset.payload.d.lon}}
+              </td>
+              <td>
+                {{asset.added_on}}
+              </td>
+          </table>
+        </div>
+      <!-- </div> -->
+      </div>
   </div>
   
   <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">
