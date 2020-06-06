@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { environment} from '../../environments/environment';
 
 
 @Injectable({
@@ -15,13 +16,13 @@ export class LoginService {
   // private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   public loggedUser: string;
 
-  loginUrl = 'http://localhost:5000/api/v1/owner/login'; 
+  baseUrl = environment.loginUrl
 
   constructor(private http: HttpClient) { }
 
   getUserDetails(email,password): Observable<any>{
     const options = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(this.loginUrl, {email,password}, { headers: options }).pipe(
+    return this.http.post<any>(this.baseUrl, {email,password}, { headers: options }).pipe(
       catchError(this.handleError));
   }
 

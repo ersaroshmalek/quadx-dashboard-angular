@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  assetLoginUrl: 'http://localhost:5000/api/v1/asset/add',
+  assetListUrl: 'http://localhost:5000/api/v1/asset',
+  assetOverviewUrl: 'http://www.localhost:5000/api/v1/asset/overview',
+  assetDataUrl: 'http://www.localhost:5000/api/v1/asset/data',
+  ownerUrl: 'http://localhost:5000/api/v1/owner/detail',
+  loginUrl: 'http://localhost:5000/api/v1/owner/login',
+  ownerUpdate: 'http://localhost:5000/api/v1/owner/detail',
 };
 
 /*

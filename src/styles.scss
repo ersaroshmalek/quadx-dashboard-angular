@@ -49,6 +49,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: white;
     position: sticky;
     &.top {
+      background: white;
       top: 0;
       z-index: 1;
     }

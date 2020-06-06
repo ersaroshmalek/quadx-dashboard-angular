@@ -5,13 +5,14 @@ import { Observable, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import { formatDate } from '@angular/common';
+import { environment } from '../../../../environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssetService {
 
-  assetUrl = 'http://www.localhost:5000/api/v1/asset/data'
+  baseUrl = environment.assetDataUrl
   moment = moment;
 
   constructor(private http: HttpClient) {}
@@ -21,7 +22,7 @@ export class AssetService {
     params = params.append('lte',endDate) 
     params = params.append('gte',startDate) 
 
-    const url = `${this.assetUrl}/${assetId}`;
+    const url = `${this.baseUrl}/${assetId}`;
     return this.http.get(url, {params: params}).pipe(
       tap(data => console.log('Asset id fetched: ' + JSON.stringify(data))),
       catchError(this.handleError))

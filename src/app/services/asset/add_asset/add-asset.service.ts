@@ -1,21 +1,21 @@
+import { environment } from '../../../../environments/environment'; 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-
 @Injectable({
   providedIn: 'root'
 })
 export class AddAssetService {
 
-  loginUrl = 'http://localhost:5000/api/v1/asset/add';
+  baseUrl = environment.assetLoginUrl;
 
   constructor(private http: HttpClient) { }
 
   addAsset(asset_username:string): Observable<any>{
     const options = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(this.loginUrl, {asset_username}, { headers: options }).pipe(
+    return this.http.post<any>(this.baseUrl, {asset_username}, { headers: options }).pipe(
       catchError(this.handleError));
   }
 

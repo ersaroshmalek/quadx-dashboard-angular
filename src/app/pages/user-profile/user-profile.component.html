@@ -25,12 +25,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-          <div class="d-flex justify-content-between">
-            <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4">Connect</a>
-            <a href="javascript:void(0)" class="btn btn-sm btn-default float-right">Message</a>
-          </div>
-        </div> -->
         <div class="card-body pt-0 pt-md-4">
           <div class="row">
             <div class="col">
@@ -83,20 +77,26 @@
           </div>
         </div>
         <div class="card-body" >
-          <form>
+          <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
             <h6 class="heading-small text-muted mb-4">User information</h6>
             <div class="pl-lg-4">
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label>Username</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="{{ownerDetails.user_name}}" disabled>
+                    <input type="text" class="form-control form-control-alternative" placeholder="Username" id="username" 
+                    [(ngModel)]="ownerDetails.user_name"
+                    name="username"
+                    disabled>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label>Email address</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="email" value="{{ownerDetails.email}}" disabled>
+                    <input type="email" class="form-control form-control-alternative" placeholder="email" id="email" 
+                    [(ngModel)]="ownerDetails.email"
+                    name="email"
+                    disabled>
                   </div>
                 </div>
               </div>
@@ -104,7 +104,9 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Owner name</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="{{ownerDetails.owner_name}}">
+                    <input type="text" class="form-control form-control-alternative" placeholder="Owner Name" id="ownername" 
+                    [(ngModel)]="ownerDetails.owner_name"
+                    name="ownername">
                   </div>
                 </div>
               </div>
@@ -117,23 +119,29 @@
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label>City</label>
-                    <input  type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="{{ownerDetails.address.city}}">
+                    <input  type="text"  class="form-control form-control-alternative" placeholder="City" [(ngModel)]="ownerDetails.address.city"
+                    [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label>Country</label>
-                    <input  type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="{{ownerDetails.address.country}}">
+                    <input  type="text" class="form-control form-control-alternative"  placeholder="Country" [(ngModel)]="ownerDetails.address.country"
+                    [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
                 <div class="col-lg-4">
                   <div class="form-group">
                     <label>Postal code</label>
-                    <input  type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code" value="{{ownerDetails.address.postalcode}}">
+                    <input  type="number" class="form-control form-control-alternative"  
+                    placeholder="Postal code" 
+                    [(ngModel)]="ownerDetails.address.postalcode"
+                    [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
               </div>
             </div>
+          
             <!-- Description -->
             <hr class="my-4" />
             <h6 class="heading-small text-muted mb-4">About me</h6>
@@ -142,20 +150,29 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Title</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Tile" value="{{ownerDetails.owner_details.title}}">
+                    <input type="text" 
+                     class="form-control form-control-alternative"  
+                     placeholder="Tile" 
+                     [(ngModel)]="ownerDetails.owner_details.title"
+                     [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Phone number</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Phone number" value="{{ownerDetails.owner_details.phone}}">
+                    <input type="text" class="form-control form-control-alternative" 
+                    placeholder="Phone number"  
+                    [(ngModel)]="ownerDetails.owner_details.phone"
+                    [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>About Me</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="A few words about you.." 
-                    value="{{ownerDetails.owner_details.brief}}" >
+                    <input type="text" class="form-control form-control-alternative" 
+                    placeholder="A few words about you.." 
+                    [(ngModel)]="ownerDetails.owner_details.brief"
+                    [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
               </div>              
@@ -168,13 +185,22 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Organization name</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Tile" value="{{ownerDetails.owner_details.org.name}}">
+                    <input type="text" class="form-control form-control-alternative" 
+                    placeholder="Tile" 
+                    [(ngModel)]="ownerDetails.owner_details.org.name"
+                    [ngModelOptions]="{standalone: true}">
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label>Organization information</label>
-                    <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Tile" value="{{ownerDetails.owner_details.org.info}}">
+                    <input type="text" class="form-control form-control-alternative" 
+                    placeholder="Tile" 
+                    [(ngModel)]="ownerDetails.owner_details.org.info"
+                    [ngModelOptions]="{standalone: true}">
+                  </div>
+                  <div class="text-right">
+                    <button mat-raised-button>Update</button>
                   </div>
                 </div>
               </div>

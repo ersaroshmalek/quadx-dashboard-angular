@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment'
 
 interface owner {
   user_name:string;
@@ -13,7 +13,7 @@ interface owner {
     city:string;
     country:string;
     postalcode:number
-  },
+  };
     owner_details:{
       org:{
         name:string;
@@ -22,7 +22,7 @@ interface owner {
       title:string;
       phone:number;
       brief:string
-    },
+    };
     owner_id:string;
     avatar:string;
 }
@@ -32,12 +32,12 @@ interface owner {
 })
 export class DetailsService {
 
-  ownerUrl = 'http://localhost:5000/api/v1/owner/detail'
+  baseUrl = environment.ownerUrl
 
   constructor(private http: HttpClient) { }
 
   getOwnerDetail(): Observable<owner> {
-    return this.http.get<owner>(this.ownerUrl).pipe(
+    return this.http.get<owner>(this.baseUrl).pipe(
       tap(),
       catchError(this.handleError))
     }

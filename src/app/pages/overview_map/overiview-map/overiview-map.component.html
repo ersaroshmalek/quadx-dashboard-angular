@@ -1,57 +1,62 @@
 <div class="container-fluid mt--7">
   <div class="row">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-3 col-sm-6">
-          <div class="form-group">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3">
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                </div>
+                <input formControlName="sDate"  class="form-control datepicker"    placeholder="Select date" name="startDate" [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text"/>
               </div>
-              <input formControlName="sDate"  class="form-control datepicker"    placeholder="Select date" name="startDate" [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" type="text"/>
             </div>
           </div>
-        </div>
-  
-        <div class="col-lg-3 col-sm-6">
-          <div class="form-group">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+    
+          <div class="col-lg-3">
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                </div>
+                <input formControlName="eDate" class="form-control datepicker"   placeholder="End date" name="endDate"  [(ngModel)]="endDate"  ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
               </div>
-              <input formControlName="eDate" class="form-control datepicker"   placeholder="End date" name="endDate"  [(ngModel)]="endDate"  ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()" type="text"/>
             </div>
           </div>
-        </div>
-  
-  
-        <div class="col-lg-3 col-sm-6">
-          <div class="form-group"  >
-            <mat-form-field >
-              <mat-label >Select Asset</mat-label>
-              <mat-select formControlName="asset" name="Asset" >
-                <mat-option>None</mat-option>
-                <mat-option  *ngFor="let asset of tableArray" [value]="asset.asset_name">
-                  {{asset.asset_name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+    
+          <div class="col-lg-3">
+            <div class="form-group">
+              <!-- <mat-form-field >
+                <mat-label >Select Asset</mat-label>
+                <mat-select formControlName="asset" name="Asset" >
+                  <mat-option>None</mat-option>
+                  <mat-option  *ngFor="let asset of tableArray" [value]="asset.asset_name">
+                    {{asset.asset_name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" formControlName="asset" name="asset_selection">
+                <option selected>Select Asset</option>
+                <option *ngFor="let asset of tableArray" [value]="asset.asset_name">{{asset.asset_name}}</option>
+              </select>
+            </div>
           </div>
-        </div>
-  
-        <div class="col-lg-3 col-sm-6">
-          <div class="form-group">
-            <span>
-              <button mat-raised-button>Show data</button>
-            </span>
+    
+          <div class="col-lg-3">
+            <div class="form-group">
+              <span>
+                <button mat-raised-button>Show data</button>
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </form>
+  </div>
 
-    <div class="row">
+  <div class="row" style="padding-bottom: 10px;">
+    <div class="col">
       <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="model"s>
         <label ngbButtonLabel class="btn-secondary">
           <input ngbButton type="radio" value="map"> Map 
@@ -61,55 +66,63 @@
         </label>
       </div>
     </div>
-
   </div>
     
-    <div class="row">
-      <div class="col">
-        <div class="card shadow border-0">
-          <div id="mapData" style="height: 600px;"></div>
-        </div>
+  <div class="row">
+    <div class="col">
+      <div class="card shadow border-0">
+        <div id="mapData" style="height: 600px;"></div>
       </div>
     </div>
+  </div>
     <div class="card shadow border-0" *ngIf="model == 'table'" style="margin-top: -600px; z-index: 999999;">
       <!-- <div class="card-header border-0"> -->
         <div class="card-header border-0">
           <h3 class="mb-0">Asset List</h3>
         </div>
-        <div class="table-responsive" style="height: 530px;overflow-x: scroll;">
+        <div class="table-responsive"  style="height: 532px;">
           <table class="table align-items-center table-flush">
-            <thead class="thead-light">
+            <thead>
               <tr>
-                <th scope="col" class="colum-sticky left-top">Asset Name</th>
-                <th scope="col" class="colum-sticky top">Asset type</th>
-                <th scope="col" class="colum-sticky top">Temperature</th>
-                <th scope="col" class="colum-sticky top">Humidity</th>
-                <th scope="col" class="colum-sticky top">Lat</th>
-                <th scope="col" class="colum-sticky top">Lon</th>
-                <th scope="col" class="colum-sticky top">Added_on</th>
+                <th scope="col" class="colum-sticky left-top">asset_name </th>
+                <th scope="col" class="colum-sticky top">asset_username</th>
+                <th scope="col" class="colum-sticky top">lat</th>
+                <th scope="col" class="colum-sticky top">lon</th>
+                <th scope="col" class="colum-sticky top">acc</th>
+                <th scope="col" class="colum-sticky top">speed</th>
+                <th scope="col" class="colum-sticky top">source</th>
+                <th scope="col" class="colum-sticky top">alt</th>
+                <th scope="col" class="colum-sticky top">source</th>
+                <th scope="col" class="colum-sticky top">time</th>
               </tr>
             </thead>
-            <tbody *ngFor="let asset of tableArray">
+            <tbody *ngFor="let asset of payload[0].data.payload" (click)="onSelect(asset)">
               <td class="colum-sticky left">
                 {{asset.asset_name}}
               </td>
               <td>
-                {{asset.asset_type}}
+                {{asset.asset_username}}
               </td>
               <td>
-                {{asset.payload.d.temp}}
+                {{asset.payload.lat}}
               </td>
               <td>
-                {{asset.payload.d.hum}}
+                {{asset.payload.lon}}
               </td>
               <td>
-                {{asset.payload.d.lat}}
+                {{asset.payload.acc}}
               </td>
               <td>
-                {{asset.payload.d.lon}}
+                {{asset.payload.speed}}
               </td>
               <td>
-                {{asset.added_on}}
+                {{asset.payload.source}}
+              </td>
+              <td>
+                {{asset.payload.alt}}
+              </td>
+              <td>
+                {{asset.payload.t}}
               </td>
           </table>
         </div>

@@ -1,3 +1,4 @@
+import { environment } from '../../../../environments/environment'; 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
@@ -9,12 +10,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AListService {
 
-  listUrl = 'http://localhost:5000/api/v1/asset';
+  baseUrl = environment.assetListUrl;
 
   constructor(private http: HttpClient) { }
 
   getAssetList(): Observable<any>{
-    return this.http.get<any[]>(this.listUrl).pipe(
+    return this.http.get<any[]>(this.baseUrl).pipe(
       catchError(this.handleError))
     }
   

@@ -3,18 +3,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { environment } from '../../../../environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class Assets {
 
-  assetUrl = 'http://localhost:5000/api/v1/asset'
+  baseUrl = environment.assetListUrl;
 
   constructor(private http: HttpClient) { }
 
   getAssets(): Observable<any[]> {
-    return this.http.get<any[]>(this.assetUrl).pipe(
+    return this.http.get<any[]>(this.baseUrl).pipe(
       tap(data => console.log('Asset id fetched: ' + JSON.stringify(data))),
       catchError(this.handleError))
     }

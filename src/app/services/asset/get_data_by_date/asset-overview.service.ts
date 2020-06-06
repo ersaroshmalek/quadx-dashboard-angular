@@ -4,18 +4,19 @@ import { catchError, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { JsonPipe } from '@angular/common';
+import { environment } from '../../../../environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssetOverviewService {
 
-  assetUrl = 'http://www.localhost:5000/api/v1/asset/overview'
+  baseUrl = environment.assetOverviewUrl
 
   constructor(private http: HttpClient) { }
 
   getAsset(): Observable<any[]> {
-    return this.http.get<any[]>(this.assetUrl).pipe(
+    return this.http.get<any[]>(this.baseUrl).pipe(
       tap(),
       catchError(this.handleError))
   }

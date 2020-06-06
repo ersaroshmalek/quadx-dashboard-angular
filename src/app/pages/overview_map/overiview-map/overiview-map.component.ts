@@ -65,7 +65,7 @@ export class OveriviewMapComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      asset: ['', Validators.required],
+      asset: ['Select Asset', Validators.required],
       sDate: ['', Validators.required],
       eDate: ['', Validators.required],
     })
@@ -131,8 +131,9 @@ export class OveriviewMapComponent implements OnInit {
         this.markerList = []
         this.payload = []
         this.payload.push(data)
-        var layerGroup = L.layerGroup().addTo(this.map);
         
+        var layerGroup = L.layerGroup().addTo(this.map);
+        console.log(this.payload)
         //call the function to display the marker 
         this.getAssetMarker(this.payload)
 
@@ -142,9 +143,27 @@ export class OveriviewMapComponent implements OnInit {
       err => this.errorMessage = < any > err)
   }
 
+
+  isExisted(assets, asset_name) {
+    for (var i = 0; i < assets.length; ++i) {
+        if (assets[i].asset_name == asset_name) {
+            return true;
+        }
+    }
+    return false;
+}
+
   onSubmit() {
+   try {
+     
     if (!this.registerForm.invalid && this.startDate && this.endDate) {
-        const start = Math.floor( new Date(this.startDate.year, this.startDate.month, this.startDate.day).getTime() );
+      
+
+      if(!this.isExisted(this.tableArray, this.registerForm.value.asset)){
+        throw new Error("Please select Device")
+      }
+      
+      const start = Math.floor( new Date(this.startDate.year, this.startDate.month, this.startDate.day).getTime() );
       const end = Math.floor( new Date(this.endDate.year, this.startDate.month, this.startDate.day ).getTime());
       const device = this.registerForm.value.asset
       // const start = formatDate(this.startDate, 'shortDate', 'en-US');
@@ -163,11 +182,15 @@ export class OveriviewMapComponent implements OnInit {
     } else {
       this.openSnackBar("Please provide all the inputs")
     }
+
+   } catch (error) {
+      console.log("OVERVIEW_ON_SUBMIT",error.message)
+      this.openSnackBar(error.message);  
+  }
   }
 
   //marker function 
   getAssetMarker(list){
-    console.log("printing func list.", list)
     if(list.length != 0) {
       list[0].data.payload.forEach(arr => {
       
@@ -189,7 +212,7 @@ export class OveriviewMapComponent implements OnInit {
 
         this.markerList.push(marker) //add marker layer to the list
         marker.bindPopup(`<b>${arr.asset_name}</b><br>${message}`).openPopup();
-        marker.addTo(this.map)
+        marker.addTo(this.map);
       })
 
       if(this.bound.length > 2){
@@ -213,6 +236,14 @@ export class OveriviewMapComponent implements OnInit {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
     });
+  }
+
+  onSelect(asset){
+    const lat = asset.payload.lat;
+    const lon = asset.payload.lon;
+    this.map.setView([lat,lon], 18);
+    // this.map.openPopup();
+    this.model = "map";
   }
 
 }

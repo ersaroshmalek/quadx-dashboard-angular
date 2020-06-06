@@ -1,31 +1,28 @@
+import { environment } from '../../../environments/environment'; 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { JsonPipe } from '@angular/common';
 
-interface myData {
-  data: object; 
-}
 @Injectable({
   providedIn: 'root'
 })
-export class OverviewService {
+export class UpdateOService {
 
-  assetUrl = 'http://localhost:5000/api/v1/asset'
+  baseUrl = environment.ownerUpdate;
 
   constructor(private http: HttpClient) { }
 
-  getAssetById(): Observable<any[]> {
-    return this.http.get<any[]>(this.assetUrl).pipe(
-      tap(),
-      catchError(this.handleError))
-    }
+  updateOwnerDetails(owner_name,owner_details,address): Observable<any>{
+    console.log("before hit the request",owner_name,owner_details,address)
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<any>(this.baseUrl, {owner_name,owner_details,address}, {headers}).pipe(
+      catchError(this.handleError));
+  }
 
   private handleError(err: HttpErrorResponse) {
     let errMsg = '';
-    
     if (err.error instanceof Error) {
       // A client-side or network error occurred. Handle it accordingly.
       console.log('An error occurred:', err.error.message);
@@ -35,6 +32,8 @@ export class OverviewService {
       // The response body may contain clues as to what went wrong,
       console.log(`Backend returned code ${err.status}`);
       errMsg = err.error.status;
+      console.log("printing error message",errMsg);
+      
     }
     return throwError(errMsg);
   }
