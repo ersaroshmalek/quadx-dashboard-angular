@@ -71,20 +71,20 @@
   <div class="row">
     <div class="col">
       <div class="card shadow border-0">
-        <div id="mapData" style="height: 600px;"></div>
+        <div id="mapData" style="height: 600px; z-index: 20;"></div>
       </div>
     </div>
   </div>
-    <div class="card shadow border-0" *ngIf="model == 'table'" style="margin-top: -600px; z-index: 999999;">
+    <div class="card shadow border-0" *ngIf="model == 'table'" style="margin-top: -600px; z-index: 21;">
       <!-- <div class="card-header border-0"> -->
         <div class="card-header border-0">
           <h3 class="mb-0">Asset List</h3>
         </div>
-        <div class="table-responsive"  style="height: 532px;">
-          <table class="table align-items-center table-flush">
-            <thead>
+        <div class="table-container table-responsive"  style="height: 532px;">
+          <table class=" align-items-center table-flush" *ngIf="payload.length !== 0" >
+            <thead >
               <tr>
-                <th scope="col" class="colum-sticky left-top">asset_name </th>
+                <th scope="col" class="colum-sticky left-top">asset_name</th>
                 <th scope="col" class="colum-sticky top">asset_username</th>
                 <th scope="col" class="colum-sticky top">lat</th>
                 <th scope="col" class="colum-sticky top">lon</th>
@@ -96,7 +96,8 @@
                 <th scope="col" class="colum-sticky top">time</th>
               </tr>
             </thead>
-            <tbody *ngFor="let asset of payload[0].data.payload" (click)="onSelect(asset)">
+            <tbody >
+              <tr *ngFor="let asset of payload[0].data.payload" (click)="onSelect(asset)">
               <td class="colum-sticky left">
                 {{asset.asset_name}}
               </td>
@@ -124,7 +125,10 @@
               <td>
                 {{asset.payload.t}}
               </td>
+              </tr>
+              </tbody>
           </table>
+          <h1 style="text-align:center" *ngIf="payload.length === 0" > NO DATA </h1>
         </div>
       <!-- </div> -->
       </div>
