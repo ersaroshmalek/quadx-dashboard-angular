@@ -38,7 +38,6 @@ export class UserProfileComponent implements OnInit {
     this.owner.getOwnerDetail().subscribe(
       ownerDetail => {
         this.ownerDetails = ownerDetail;
-        console.log("printing owner details",this.ownerDetails  );
         
         this.SpinnerService.hide()
       },
@@ -57,7 +56,6 @@ export class UserProfileComponent implements OnInit {
   onSubmit(){
     this.ownerUpdate.updateOwnerDetails(this.ownerDetails.owner_name,this.ownerDetails.owner_details,this.ownerDetails.address).subscribe(
       data => this.openSnackBar("Profile updated successfully"),
-      err => console.log('erorr',err)
     )
     this.getOwnerDetails()
   }

@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem('JWT_TOKEN',res.token.access_token)
           this.router.navigate(['maps'])
         } else {
-          console.log("Bad credential")
           this.openSnackBar("Wronge Credentials!")
         }
       },

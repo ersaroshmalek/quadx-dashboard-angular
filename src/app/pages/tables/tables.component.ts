@@ -43,7 +43,6 @@ export class TablesComponent implements OnInit {
     this.SpinnerService.show(); 
     this.overview.getAssets().subscribe(data => {
       this.tableData = data;
-      console.log(this.tableData);
       this.SpinnerService.hide();
     })    
   };
@@ -51,14 +50,12 @@ export class TablesComponent implements OnInit {
   addAsset(assetName){
       this.asset.addAsset(assetName).subscribe(
         asset => {
-          console.log("Asset added successfully");
           this.openSnackBar("Asset addedd successfully");
           this.getTabelData();
         },
         err => {
           this.errorMessage = <any>err
           this.openSnackBar("You are not authorized to add this asset");
-          console.log("can add this asset");
         }
       )
     
@@ -74,7 +71,6 @@ export class TablesComponent implements OnInit {
 
   onSelect(asset): void {
     this.selectedAsset = asset;
-    console.log(this.selectedAsset);
   }
 
   openDialog() {

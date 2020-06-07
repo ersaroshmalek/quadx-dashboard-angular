@@ -19,7 +19,7 @@
       <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link pr-0" role="button" ngbDropdownToggle>
           <div class="media align-items-center">
-            <span class="avatar avatar-sm rounded-circle">
+            <span class="avatar avatar-sm rounded-circle" *ngIf="ownerAvtar">
               <img alt="Image placeholder" src={{ownerAvtar}}>
             </span>
             <div class="media-body ml-2 d-none d-lg-block">

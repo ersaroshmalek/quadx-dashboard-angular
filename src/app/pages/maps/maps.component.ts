@@ -114,6 +114,13 @@ export class MapsComponent implements AfterViewInit, OnInit {
     this.asset.getAsset().subscribe(
       asset => {
         this.tableArray = asset;
+
+        for(let i in this.tableArray) {
+          if(this.tableArray[i].added_on) {
+            this.tableArray[i].added_on = this.moment.unix(this.tableArray[i].added_on).format('Do MMMM YYYY, dddd h:mm:ss a')
+          }
+        }
+        
         this.assetMarker(this.map);
         this.SpinnerService.hide();
       },

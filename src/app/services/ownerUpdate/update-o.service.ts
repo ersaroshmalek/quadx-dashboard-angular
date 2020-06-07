@@ -15,7 +15,6 @@ export class UpdateOService {
   constructor(private http: HttpClient) { }
 
   updateOwnerDetails(owner_name,owner_details,address): Observable<any>{
-    console.log("before hit the request",owner_name,owner_details,address)
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put<any>(this.baseUrl, {owner_name,owner_details,address}, {headers}).pipe(
       catchError(this.handleError));
@@ -32,7 +31,6 @@ export class UpdateOService {
       // The response body may contain clues as to what went wrong,
       console.log(`Backend returned code ${err.status}`);
       errMsg = err.error.status;
-      console.log("printing error message",errMsg);
       
     }
     return throwError(errMsg);

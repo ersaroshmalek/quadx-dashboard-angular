@@ -31,27 +31,29 @@
               </tr>
             </thead>
             <tbody *ngFor="let asset of tableArray" (click)="onSelect(asset)">
-              <td class="colum-sticky left">
-                {{asset.asset_name}}
-              </td>
-              <td>
-                {{asset.asset_type}}
-              </td>
-              <td>
-                {{asset.payload.d.temp}}
-              </td>
-              <td>
-                {{asset.payload.d.hum}}
-              </td>
-              <td>
-                {{asset.payload.d.lat}}
-              </td>
-              <td>
-                {{asset.payload.d.lon}}
-              </td>
-              <td>
-                {{asset.added_on}}
-              </td>
+              <tr>
+                <th scope="row" class="colum-sticky left">
+                  {{asset.asset_name}}
+                </th>
+                <td>
+                  {{asset.asset_type}}
+                </td>
+                <td>
+                  {{asset.payload.d.temp}}
+                </td>
+                <td>
+                  {{asset.payload.d.hum}}
+                </td>
+                <td>
+                  {{asset.payload.d.lat}}
+                </td>
+                <td>
+                  {{asset.payload.d.lon}}
+                </td>
+                <td>
+                  {{asset.added_on}}
+                </td>
+              </tr>
           </table>
         </div>
       <!-- </div> -->

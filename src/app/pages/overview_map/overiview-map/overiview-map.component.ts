@@ -132,8 +132,13 @@ export class OveriviewMapComponent implements OnInit {
         this.payload = []
         this.payload.push(data)
         
+        for(let i in this.payload[0].data.payload) {
+          if (this.payload[0].data.payload[i].payload.t){
+            this.payload[0].data.payload[i].payload.t = this.moment.unix(this.payload[0].data.payload[i].payload.t).format('Do MMMM YYYY, dddd h:mm:ss a')
+          }
+        }
+
         var layerGroup = L.layerGroup().addTo(this.map);
-        console.log(this.payload)
         //call the function to display the marker 
         this.getAssetMarker(this.payload)
 
@@ -182,7 +187,6 @@ export class OveriviewMapComponent implements OnInit {
     }
 
    } catch (error) {
-      console.log("OVERVIEW_ON_SUBMIT",error.message)
       this.openSnackBar(error.message);  
   }
   }

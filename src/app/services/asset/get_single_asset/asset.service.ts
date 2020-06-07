@@ -24,7 +24,6 @@ export class AssetService {
 
     const url = `${this.baseUrl}/${assetId}`;
     return this.http.get(url, {params: params}).pipe(
-      tap(data => console.log('Asset id fetched: ' + JSON.stringify(data))),
       catchError(this.handleError))
   }
   private handleError(err: HttpErrorResponse) {
