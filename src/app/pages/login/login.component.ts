@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   inputType: string = "password";
   errorMessage:string;
-  loginMessage: "Logged in success fully"
   
   constructor(
     private log: LoginService,
@@ -40,7 +39,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.log.getUserDetails(username, password).subscribe(
       res => {
         if(res.token.access_token != null) {
-          this.openSnackBar("Logged in successfully!")
           localStorage.setItem('JWT_TOKEN',res.token.access_token)
           this.router.navigate(['maps'])
         } else {
