@@ -163,15 +163,13 @@ export class OveriviewMapComponent implements OnInit {
         throw new Error("Please select Device")
       }
       
-      const start = Math.floor( new Date(this.startDate.year, this.startDate.month, this.startDate.day).getTime() );
-      const end = Math.floor( new Date(this.endDate.year, this.startDate.month, this.startDate.day ).getTime());
+      const epochStart = Math.floor( new Date(this.startDate.year, (this.startDate.month - 1 ) > 0 ? (this.startDate.month - 1 ) : 0  , this.startDate.day).getTime() / 1000 );
+      const epochEnd = Math.floor( new Date(this.endDate.year, (this.endDate.month - 1) > 0 ? (this.endDate.month - 1): 0 , this.endDate.day ).getTime() / 1000);
       const device = this.registerForm.value.asset
-      // const start = formatDate(this.startDate, 'shortDate', 'en-US');
-      // const end = formatDate(this.endDate, 'shortDate', 'en-US');
+      
       var assetId = ''
 
-      const epochStart = Math.floor((new Date(start).getTime()) / 1000);
-      const epochEnd = Math.floor((new Date(end).getTime()) / 1000);
+      
       this.SpinnerService.show();
       this.tableArray.forEach(i => {
         if (device == i.asset_name) {
